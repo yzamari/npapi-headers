@@ -57,12 +57,15 @@
 # endif /* XP_WIN */
 #endif /* _WINDOWS */
 
-#ifdef XP_MACOSX
-#ifdef __LP64__
+#if defined(XP_MACOSX) && defined(__LP64__)
 #define NP_NO_QUICKDRAW
 #define NP_NO_CARBON
+#endif
+
+#ifdef XP_MACOSX
 #include <ApplicationServices/ApplicationServices.h>
-#else
+#include <OpenGL/OpenGL.h>
+#ifndef NP_NO_CARBON
 #include <Carbon/Carbon.h>
 #endif
 #endif
@@ -247,6 +250,7 @@ typedef enum {
   NPDrawingModelQuickDraw = 0,
 #endif
   NPDrawingModelCoreGraphics = 1,
+  NPDrawingModelOpenGL = 2,
   NPDrawingModelCoreAnimation = 3
 } NPDrawingModel;
 
@@ -381,6 +385,7 @@ typedef enum {
   , NPNVsupportsQuickDrawBool = 2000
 #endif
   , NPNVsupportsCoreGraphicsBool = 2001
+  , NPNVsupportsOpenGLBool = 2002
   , NPNVsupportsCoreAnimationBool = 2003
 #ifndef NP_NO_CARBON
   , NPNVsupportsCarbonBool = 3000 /* TRUE if the browser supports the Carbon event model */
@@ -544,6 +549,21 @@ typedef struct NP_CGContext
   void *window; /* A WindowRef or NULL for the Cocoa event model. */
 #endif
 } NP_CGContext;
+
+/* 
+ * NP_GLContext is the type of the NPWindow's 'window' when the plugin specifies NPDrawingModelOpenGL as its
+ * drawing model.
+ */
+
+typedef struct NP_GLContext
+{
+  CGLContextObj context;
+#ifdef NP_NO_CARBON
+  NPNSWindow *window;
+#else
+  void *window; // Can be either an NSWindow or a WindowRef depending on the event model
+#endif
+} NP_GLContext;
 
 typedef enum {
   NPCocoaEventDrawRect = 1,
