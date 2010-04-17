@@ -45,17 +45,17 @@
 #include "nptypes.h"
 
 #if defined (__OS2__) || defined (OS2)
-# ifndef XP_OS2
-#  define XP_OS2 1
-# endif /* XP_OS2 */
-#endif /* __OS2__ */
+#ifndef XP_OS2
+#define XP_OS2 1
+#endif
+#endif
 
 #ifdef _WINDOWS
-# include <windef.h>
-# ifndef XP_WIN
-#  define XP_WIN 1
-# endif /* XP_WIN */
-#endif /* _WINDOWS */
+#include <windef.h>
+#ifndef XP_WIN
+#define XP_WIN 1
+#endif
+#endif
 
 #if defined(XP_MACOSX) && defined(__LP64__)
 #define NP_NO_QUICKDRAW
@@ -71,11 +71,11 @@
 #endif
 
 #if defined(XP_UNIX) 
-# include <stdio.h>
-# if defined(MOZ_X11)
-#  include <X11/Xlib.h>
-#  include <X11/Xutil.h>
-# endif
+#include <stdio.h>
+#if defined(MOZ_X11)
+#include <X11/Xlib.h>
+#include <X11/Xutil.h>
+#endif
 #endif
 
 /*----------------------------------------------------------------------*/
@@ -142,7 +142,7 @@ typedef char*         NPMIMEType;
 /*----------------------------------------------------------------------*/
 
 #if !defined(__LP64__)
-#if defined(XP_MAC) || defined(XP_MACOSX)
+#if defined(XP_MACOSX)
 #pragma options align=mac68k
 #endif
 #endif /* __LP64__ */
@@ -630,11 +630,6 @@ enum NPEventType {
   NPEventType_ScrollingBeginsEvent = 1000,
   NPEventType_ScrollingEndsEvent
 };
-#ifdef OBSOLETE
-#define getFocusEvent     (osEvt + 16)
-#define loseFocusEvent    (osEvt + 17)
-#define adjustCursorEvent (osEvt + 18)
-#endif /* OBSOLETE */
 #endif /* NP_NO_CARBON */
 
 #endif /* XP_MACOSX */
@@ -656,7 +651,7 @@ enum NPEventType {
 #define NP_MAXREADY (((unsigned)(~0)<<1)>>1)
 
 #if !defined(__LP64__)
-#if defined(XP_MAC) || defined(XP_MACOSX)
+#if defined(XP_MACOSX)
 #pragma options align=reset
 #endif
 #endif /* __LP64__ */
