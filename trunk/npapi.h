@@ -303,29 +303,23 @@ typedef enum {
   NPPVpluginDescriptionString,
   NPPVpluginWindowBool,
   NPPVpluginTransparentBool,
-  NPPVjavaClass,                /* Not implemented in Mozilla 1.0 */
+  NPPVjavaClass,
   NPPVpluginWindowSize,
   NPPVpluginTimerInterval,
-
   NPPVpluginScriptableInstance = (10 | NP_ABI_MASK),
   NPPVpluginScriptableIID = 11,
-
-  /* Introduced in Mozilla 0.9.9 */
   NPPVjavascriptPushCallerBool = 12,
-
-  /* Introduced in Mozilla 1.0 */
   NPPVpluginKeepLibraryInMemory = 13,
   NPPVpluginNeedsXEmbed         = 14,
 
-  /* Get the NPObject for scripting the plugin. Introduced in Firefox
-   * 1.0 (NPAPI minor version 14).
+  /* Get the NPObject for scripting the plugin. Introduced in NPAPI minor version 14.
    */
   NPPVpluginScriptableNPObject  = 15,
 
   /* Get the plugin value (as \0-terminated UTF-8 string data) for
    * form submission if the plugin is part of a form. Use
    * NPN_MemAlloc() to allocate memory for the string data. Introduced
-   * in Mozilla 1.8b2 (NPAPI minor version 15).
+   * in NPAPI minor version 15.
    */
   NPPVformValue = 16,
   
@@ -351,7 +345,7 @@ typedef enum {
 } NPPVariable;
 
 /*
- * List of variable names for which NPN_GetValue is implemented by Mozilla
+ * List of variable names for which NPN_GetValue should be implemented.
  */
 typedef enum {
   NPNVxDisplay = 1,
@@ -361,9 +355,8 @@ typedef enum {
   NPNVasdEnabledBool,
   NPNVisOfflineBool,
 
-  /* 10 and over are available on Mozilla builds starting with 0.9.4 */
   NPNVserviceManager = (10 | NP_ABI_MASK),
-  NPNVDOMElement     = (11 | NP_ABI_MASK),   /* available in Mozilla 1.2 */
+  NPNVDOMElement     = (11 | NP_ABI_MASK),
   NPNVDOMWindow      = (12 | NP_ABI_MASK),
   NPNVToolkit        = (13 | NP_ABI_MASK),
   NPNVSupportsXEmbedBool = 14,
