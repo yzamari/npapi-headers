@@ -328,7 +328,10 @@ typedef enum {
   /* Checks if the plugin is interested in receiving the http body of
    * all http requests (including failed ones, http status != 200).
    */
-  NPPVpluginWantsAllNetworkStreams = 18
+  NPPVpluginWantsAllNetworkStreams = 18,
+
+  /* Checks to see if the plug-in would like the browser to load the "src" attribute. */
+  NPPVpluginCancelSrcStream = 20
 
 #ifdef XP_MACOSX
   /* Used for negotiating drawing models */
