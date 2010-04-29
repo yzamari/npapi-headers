@@ -330,6 +330,9 @@ typedef enum {
    */
   NPPVpluginWantsAllNetworkStreams = 18,
 
+  /* Browsers can retrieve a native ATK accessibility plug ID via this variable. */
+  NPPVpluginNativeAccessibleAtkPlugId = 19,
+
   /* Checks to see if the plug-in would like the browser to load the "src" attribute. */
   NPPVpluginCancelSrcStream = 20
 
