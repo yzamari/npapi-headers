@@ -205,6 +205,11 @@ typedef struct _NPSize
   int32_t height; 
 } NPSize; 
 
+/* Return values for NPP_HandleEvent */
+const int16_t kNPEventNotHandled = 0;
+const int16_t kNPEventHandled = 1;
+const int16_t kNPEventStartIME = 2; /* Exact meaning must be spec'd in event model. */
+
 #ifdef XP_UNIX
 /*
  * Unix specific structures and definitions
