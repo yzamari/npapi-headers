@@ -206,9 +206,10 @@ typedef struct _NPSize
 } NPSize; 
 
 /* Return values for NPP_HandleEvent */
-const int16_t kNPEventNotHandled = 0;
-const int16_t kNPEventHandled = 1;
-const int16_t kNPEventStartIME = 2; /* Exact meaning must be spec'd in event model. */
+#define kNPEventNotHandled 0
+#define kNPEventHandled 1
+/* Exact meaning must be spec'd in event model. */
+#define kNPEventStartIME 2
 
 #ifdef XP_UNIX
 /*
