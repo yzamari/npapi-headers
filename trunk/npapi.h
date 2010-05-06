@@ -70,7 +70,7 @@
 #endif
 #endif
 
-#if defined(XP_UNIX) 
+#if defined(XP_UNIX)
 #include <stdio.h>
 #if defined(MOZ_X11)
 #include <X11/Xlib.h>
@@ -199,11 +199,11 @@ typedef struct _NPRect
   uint16_t right;
 } NPRect;
 
-typedef struct _NPSize 
-{ 
-  int32_t width; 
-  int32_t height; 
-} NPSize; 
+typedef struct _NPSize
+{
+  int32_t width;
+  int32_t height;
+} NPSize;
 
 /* Return values for NPP_HandleEvent */
 #define kNPEventNotHandled 0
@@ -269,21 +269,21 @@ typedef enum {
 #endif
 
 /*
- *   The following masks are applied on certain platforms to NPNV and 
- *   NPPV selectors that pass around pointers to COM interfaces. Newer 
- *   compilers on some platforms may generate vtables that are not 
- *   compatible with older compilers. To prevent older plugins from 
- *   not understanding a new browser's ABI, these masks change the 
+ *   The following masks are applied on certain platforms to NPNV and
+ *   NPPV selectors that pass around pointers to COM interfaces. Newer
+ *   compilers on some platforms may generate vtables that are not
+ *   compatible with older compilers. To prevent older plugins from
+ *   not understanding a new browser's ABI, these masks change the
  *   values of those selectors on those platforms. To remain backwards
- *   compatible with different versions of the browser, plugins can 
+ *   compatible with different versions of the browser, plugins can
  *   use these masks to dynamically determine and use the correct C++
- *   ABI that the browser is expecting. This does not apply to Windows 
+ *   ABI that the browser is expecting. This does not apply to Windows
  *   as Microsoft's COM ABI will likely not change.
  */
 
 #define NP_ABI_GCC3_MASK  0x10000000
 /*
- *   gcc 3.x generated vtables on UNIX and OSX are incompatible with 
+ *   gcc 3.x generated vtables on UNIX and OSX are incompatible with
  *   previous compilers.
  */
 #if (defined(XP_UNIX) && defined(__GNUC__) && (__GNUC__ >= 3))
@@ -328,9 +328,9 @@ typedef enum {
    * in NPAPI minor version 15.
    */
   NPPVformValue = 16,
-  
+
   NPPVpluginUrlRequestsDisplayedBool = 17,
-  
+
   /* Checks if the plugin is interested in receiving the http body of
    * all http requests (including failed ones, http status != 200).
    */
@@ -538,12 +538,19 @@ typedef enum {
 
 #ifdef XP_MACOSX
 
+#ifndef NP_NO_QUICKDRAW
 typedef struct NP_Port
 {
   CGrafPtr port;
   int32_t portx; /* position inside the topmost window */
   int32_t porty;
 } NP_Port;
+#endif /* NP_NO_QUICKDRAW */
+
+/*
+ * NP_CGContext is the type of the NPWindow's 'window' when the plugin specifies NPDrawingModelCoreGraphics
+ * as its drawing model.
+ */
 
 typedef struct NP_CGContext
 {
@@ -555,7 +562,7 @@ typedef struct NP_CGContext
 #endif
 } NP_CGContext;
 
-/* 
+/*
  * NP_GLContext is the type of the NPWindow's 'window' when the plugin specifies NPDrawingModelOpenGL as its
  * drawing model.
  */
@@ -566,7 +573,7 @@ typedef struct NP_GLContext
 #ifdef NP_NO_CARBON
   NPNSWindow *window;
 #else
-  void *window; // Can be either an NSWindow or a WindowRef depending on the event model
+  void *window; /* Can be either an NSWindow or a WindowRef depending on the event model */
 #endif
 } NP_GLContext;
 
@@ -594,7 +601,7 @@ typedef struct _NPCocoaEvent {
     struct {
       uint32_t modifierFlags;
       double   pluginX;
-      double   pluginY;           
+      double   pluginY;
       int32_t  buttonNumber;
       int32_t  clickCount;
       double   deltaX;
