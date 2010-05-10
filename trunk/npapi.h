@@ -741,11 +741,11 @@ extern "C" {
 /* NPP_* functions are provided by the plugin and called by the navigator. */
 
 #ifdef XP_UNIX
-char* NPP_GetMIMEDescription();
+char* NPP_GetMIMEDescription(void);
 #endif
 
-NPError NP_LOADDS NPP_Initialize();
-void    NP_LOADDS NPP_Shutdown();
+NPError NP_LOADDS NPP_Initialize(void);
+void    NP_LOADDS NPP_Shutdown(void);
 NPError NP_LOADDS NPP_New(NPMIMEType pluginType, NPP instance,
                           uint16_t mode, int16_t argc, char* argn[],
                           char* argv[], NPSavedData* saved);
