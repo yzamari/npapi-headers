@@ -50,10 +50,17 @@
 #endif
 #endif
 
-#ifdef _WINDOWS
+#ifdef _WINDOWS && !defined(__SYMBIAN32__)
 #include <windef.h>
 #ifndef XP_WIN
 #define XP_WIN 1
+#endif
+#endif
+
+#ifdef __SYMBIAN32__
+#ifndef XP_SYMBIAN
+#define XP_SYMBIAN 1
+#undef XP_WIN
 #endif
 #endif
 
@@ -76,6 +83,11 @@
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
 #endif
+#endif
+
+#if defined(XP_SYMBIAN)
+#include <QEvent>
+#include <QRegion>
 #endif
 
 /*----------------------------------------------------------------------*/
@@ -434,7 +446,7 @@ typedef struct _NPWindow
   uint32_t width;  /* Maximum window size */
   uint32_t height;
   NPRect   clipRect; /* Clipping rectangle in port coordinates */
-#if defined(XP_UNIX) && !defined(XP_MACOSX)
+#if (defined(XP_UNIX) || defined(XP_SYMBIAN)) && !defined(XP_MACOSX)
   void * ws_info; /* Platform-dependent additional data */
 #endif /* XP_UNIX */
   NPWindowType type; /* Is this a window or a drawable? */
@@ -480,10 +492,12 @@ typedef struct _NPPrint
   } print;
 } NPPrint;
 
-#ifdef XP_MACOSX
+#if defined(XP_MACOSX)
 #ifndef NP_NO_CARBON
 typedef EventRecord NPEvent;
 #endif
+#elif defined(XP_SYMBIAN)
+typedef QEvent NPEvent;
 #elif defined(XP_WIN)
 typedef struct _NPEvent
 {
@@ -498,13 +512,13 @@ typedef struct _NPEvent
   uint32_t wParam;
   uint32_t lParam;
 } NPEvent;
-#elif defined (XP_UNIX) && defined(MOZ_X11)
+#elif defined(XP_UNIX) && defined(MOZ_X11)
 typedef XEvent NPEvent;
 #else
 typedef void*  NPEvent;
 #endif
 
-#ifdef XP_MACOSX
+#if defined(XP_MACOSX)
 typedef void* NPRegion;
 #ifndef NP_NO_QUICKDRAW
 typedef RgnHandle NPQDRegion;
@@ -514,6 +528,8 @@ typedef CGPathRef NPCGRegion;
 typedef HRGN NPRegion;
 #elif defined(XP_UNIX) && defined(MOZ_X11)
 typedef Region NPRegion;
+#elif defined(XP_SYMBIAN)
+typedef QRegion* NPRegion;
 #else
 typedef void *NPRegion;
 #endif
