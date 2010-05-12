@@ -64,6 +64,12 @@
 #endif
 #endif
 
+#if defined(__APPLE_CC__) && !defined(XP_UNIX)
+#ifndef XP_MACOSX
+#define XP_MACOSX 1
+#endif
+#endif
+
 #if defined(XP_MACOSX) && defined(__LP64__)
 #define NP_NO_QUICKDRAW
 #define NP_NO_CARBON
