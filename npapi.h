@@ -38,13 +38,13 @@
 #ifndef npapi_h_
 #define npapi_h_
 
-#ifdef __OS2__
+#if defined(__OS2__)
 #pragma pack(1)
 #endif
 
 #include "nptypes.h"
 
-#if defined (__OS2__) || defined (OS2)
+#if defined(__OS2__) || defined(OS2)
 #ifndef XP_OS2
 #define XP_OS2 1
 #endif
@@ -57,7 +57,7 @@
 #endif
 #endif
 
-#ifdef __SYMBIAN32__
+#if defined(__SYMBIAN32__)
 #ifndef XP_SYMBIAN
 #define XP_SYMBIAN 1
 #undef XP_WIN
@@ -75,7 +75,7 @@
 #define NP_NO_CARBON
 #endif
 
-#ifdef XP_MACOSX
+#if defined(XP_MACOSX)
 #include <ApplicationServices/ApplicationServices.h>
 #include <OpenGL/OpenGL.h>
 #ifndef NP_NO_CARBON
@@ -229,7 +229,7 @@ typedef struct _NPSize
 /* Exact meaning must be spec'd in event model. */
 #define kNPEventStartIME 2
 
-#ifdef XP_UNIX
+#if defined(XP_UNIX)
 /*
  * Unix specific structures and definitions
  */
@@ -252,7 +252,7 @@ typedef struct
 typedef struct
 {
   int32_t      type;
-#ifdef MOZ_X11
+#if defined(MOZ_X11)
   Display*     display;
   Visual*      visual;
   Colormap     colormap;
@@ -268,7 +268,7 @@ typedef struct
 
 #endif /* XP_UNIX */
 
-#ifdef XP_MACOSX
+#if defined(XP_MACOSX)
 typedef enum {
 #ifndef NP_NO_QUICKDRAW
   NPDrawingModelQuickDraw = 0,
@@ -310,7 +310,7 @@ typedef enum {
 #define _NP_ABI_MIXIN_FOR_GCC3 0
 #endif
 
-#ifdef XP_MACOSX
+#if defined(XP_MACOSX)
 #define NP_ABI_MACHO_MASK 0x01000000
 #define _NP_ABI_MIXIN_FOR_MACHO NP_ABI_MACHO_MASK
 #else
@@ -360,7 +360,7 @@ typedef enum {
   /* Checks to see if the plug-in would like the browser to load the "src" attribute. */
   NPPVpluginCancelSrcStream = 20
 
-#ifdef XP_MACOSX
+#if defined(XP_MACOSX)
   /* Used for negotiating drawing models */
   , NPPVpluginDrawingModel = 1000
   /* Used for negotiating event models */
@@ -401,7 +401,7 @@ typedef enum {
 
   NPNVprivateModeBool = 18
 
-#ifdef XP_MACOSX
+#if defined(XP_MACOSX)
   /* Used for negotiating drawing models */
   , NPNVpluginDrawingModel = 1000
 #ifndef NP_NO_QUICKDRAW
@@ -544,7 +544,7 @@ typedef struct _NPNSString NPNSString;
 typedef struct _NPNSWindow NPNSWindow;
 typedef struct _NPNSMenu   NPNSMenu;
 
-#ifdef XP_MACOSX
+#if defined(XP_MACOSX)
 typedef NPNSMenu NPMenu;
 #else
 typedef void *NPMenu;
@@ -558,7 +558,7 @@ typedef enum {
   NPCoordinateSpaceFlippedScreen
 } NPCoordinateSpace;
 
-#ifdef XP_MACOSX
+#if defined(XP_MACOSX)
 
 #ifndef NP_NO_QUICKDRAW
 typedef struct NP_Port
@@ -762,7 +762,7 @@ extern "C" {
 
 /* NPP_* functions are provided by the plugin and called by the navigator. */
 
-#ifdef XP_UNIX
+#if defined(XP_UNIX)
 char* NPP_GetMIMEDescription(void);
 #endif
 
@@ -854,7 +854,7 @@ NPBool      NP_LOADDS NPN_ConvertPoint(NPP instance, double sourceX, double sour
 #endif
 
 #endif /* RC_INVOKED */
-#ifdef __OS2__
+#if defined(__OS2__)
 #pragma pack()
 #endif
 
