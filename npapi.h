@@ -746,7 +746,7 @@ enum NPEventType {
 #define NPVERS_HAS_ALL_NETWORK_STREAMS      20
 #define NPVERS_HAS_URL_AND_AUTH_INFO        21
 #define NPVERS_HAS_PRIVATE_MODE             22
-#define NPVERS_MACOSX_HAS_EVENT_MODELS      23
+#define NPVERS_MACOSX_HAS_COCOA_EVENTS      23
 
 /*----------------------------------------------------------------------*/
 /*                        Function Prototypes                           */
