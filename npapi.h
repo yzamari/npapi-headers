@@ -577,11 +577,7 @@ typedef struct NP_Port
 typedef struct NP_CGContext
 {
   CGContextRef context;
-#ifdef NP_NO_CARBON
-  NPNSWindow *window;
-#else
-  void *window; /* A WindowRef or NULL for the Cocoa event model. */
-#endif
+  void *window; /* A WindowRef under the Carbon event model. */
 } NP_CGContext;
 
 /*
