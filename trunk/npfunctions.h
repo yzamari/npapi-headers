@@ -222,7 +222,7 @@ typedef const char* (*NP_GetMIMEDescriptionProcPtr)();
 typedef OSErr (*BP_GetSupportedMIMETypesProcPtr)(BPSupportedMIMETypes*, UInt32);
 #endif
 
-#if defined(_WINDOWS)
+#if defined(_WIN32)
 #define OSCALL WINAPI
 #else
 #if defined(__OS2__)
@@ -244,7 +244,7 @@ typedef OSErr (*BP_GetSupportedMIMETypesProcPtr)(BPSupportedMIMETypes*, UInt32);
 #define NP_EXPORT(__type) NP_VISIBILITY_DEFAULT __type
 #endif
 
-#if defined(_WINDOWS) || defined (__OS2__)
+#if defined(_WIN32) || defined (__OS2__)
 #ifdef __cplusplus
 extern "C" {
 #endif

@@ -50,7 +50,7 @@
 #endif
 #endif
 
-#ifdef _WINDOWS && !defined(__SYMBIAN32__)
+#if defined(_WIN32) && !defined(__SYMBIAN32__)
 #include <windef.h>
 #ifndef XP_WIN
 #define XP_WIN 1
