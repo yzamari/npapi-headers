@@ -101,7 +101,7 @@
 /*----------------------------------------------------------------------*/
 
 #define NP_VERSION_MAJOR 0
-#define NP_VERSION_MINOR 23
+#define NP_VERSION_MINOR 25
 
 
 /* The OS/2 version of Netscape uses RC_DATA to define the
@@ -222,6 +222,11 @@ typedef struct _NPSize
   int32_t width;
   int32_t height;
 } NPSize;
+
+enum  {
+  NPFocusNext = 0,
+  NPFocusPrevious = 1
+} NPFocusDirection;
 
 /* Return values for NPP_HandleEvent */
 #define kNPEventNotHandled 0
@@ -359,7 +364,9 @@ typedef enum {
   NPPVpluginNativeAccessibleAtkPlugId = 19,
 
   /* Checks to see if the plug-in would like the browser to load the "src" attribute. */
-  NPPVpluginCancelSrcStream = 20
+  NPPVpluginCancelSrcStream = 20,
+
+  NPPVSupportsAdvancedKeyHandling = 21
 
 #if defined(XP_MACOSX)
   /* Used for negotiating drawing models */
@@ -400,7 +407,9 @@ typedef enum {
 
   NPNVSupportsWindowless = 17,
 
-  NPNVprivateModeBool = 18
+  NPNVprivateModeBool = 18,
+
+  NPNVsupportsAdvancedKeyHandling = 21
 
 #if defined(XP_MACOSX)
   /* Used for negotiating drawing models */
@@ -789,6 +798,8 @@ void    NP_LOADDS NPP_URLNotify(NPP instance, const char* url,
                                 NPReason reason, void* notifyData);
 NPError NP_LOADDS NPP_GetValue(NPP instance, NPPVariable variable, void *value);
 NPError NP_LOADDS NPP_SetValue(NPP instance, NPNVariable variable, void *value);
+NPBool  NP_LOADDS NPP_GotFocus(NPP instance, NPFocusDirection direction);
+void    NP_LOADDS NPP_LostFocus(NPP instance);
 
 /* NPN_* functions are provided by the navigator and called by the plugin. */
 void        NP_LOADDS NPN_Version(int* plugin_major, int* plugin_minor,
@@ -848,6 +859,8 @@ uint32_t    NP_LOADDS NPN_ScheduleTimer(NPP instance, uint32_t interval, NPBool 
 void        NP_LOADDS NPN_UnscheduleTimer(NPP instance, uint32_t timerID);
 NPError     NP_LOADDS NPN_PopUpContextMenu(NPP instance, NPMenu* menu);
 NPBool      NP_LOADDS NPN_ConvertPoint(NPP instance, double sourceX, double sourceY, NPCoordinateSpace sourceSpace, double *destX, double *destY, NPCoordinateSpace destSpace);
+NPBool      NP_LOADDS NPN_HandleEvent(NPP instance, void *event, NPBool handled);
+NPBool      NP_LOADDS NPN_UnfocusInstance(NPP instance, NPFocusDirection direction);
 
 #ifdef __cplusplus
 }  /* end extern "C" */

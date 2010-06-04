@@ -65,6 +65,8 @@ typedef void         (* NP_LOADDS NPP_URLNotifyProcPtr)(NPP instance, const char
    by the plugin on the way out. The browser is responsible for releasing. */
 typedef NPError      (* NP_LOADDS NPP_GetValueProcPtr)(NPP instance, NPPVariable variable, void *ret_value);
 typedef NPError      (* NP_LOADDS NPP_SetValueProcPtr)(NPP instance, NPNVariable variable, void *value);
+typedef NPBool       (* NP_LOADDS NPP_GotFocusPtr)(NPP instance, NPFocusDirection direction);
+typedef void         (* NP_LOADDS NPP_LostFocusPtr)(NPP instance);
 
 typedef NPError      (*NPN_GetValueProcPtr)(NPP instance, NPNVariable variable, void *ret_value);
 typedef NPError      (*NPN_SetValueProcPtr)(NPP instance, NPPVariable variable, void *value);
@@ -120,6 +122,8 @@ typedef uint32_t     (*NPN_ScheduleTimerPtr)(NPP instance, uint32_t interval, NP
 typedef void         (*NPN_UnscheduleTimerPtr)(NPP instance, uint32_t timerID);
 typedef NPError      (*NPN_PopUpContextMenuPtr)(NPP instance, NPMenu* menu);
 typedef NPBool       (*NPN_ConvertPointPtr)(NPP instance, double sourceX, double sourceY, NPCoordinateSpace sourceSpace, double *destX, double *destY, NPCoordinateSpace destSpace);
+typedef NPBool       (*NPN_HandleEventPtr)(NPP instance, void *event, NPBool handled);
+typedef NPBool       (*NPN_UnfocusInstancePtr)(NPP instance, NPFocusDirection direction);
 
 typedef struct _NPPluginFuncs {
   uint16_t size;
@@ -138,6 +142,8 @@ typedef struct _NPPluginFuncs {
   void* javaClass;
   NPP_GetValueProcPtr getvalue;
   NPP_SetValueProcPtr setvalue;
+  NPP_GotFocusPtr gotfocus;
+  NPP_LostFocusPtr lostfocus;
 } NPPluginFuncs;
 
 typedef struct _NPNetscapeFuncs {
@@ -195,6 +201,8 @@ typedef struct _NPNetscapeFuncs {
   NPN_UnscheduleTimerPtr unscheduletimer;
   NPN_PopUpContextMenuPtr popupcontextmenu;
   NPN_ConvertPointPtr convertpoint;
+  NPN_HandleEventPtr handleevent;
+  NPN_UnfocusInstancePtr unfocusinstance;
 } NPNetscapeFuncs;
 
 #ifdef XP_MACOSX
