@@ -223,7 +223,7 @@ typedef struct _NPSize
   int32_t height;
 } NPSize;
 
-enum  {
+typedef enum {
   NPFocusNext = 0,
   NPFocusPrevious = 1
 } NPFocusDirection;
