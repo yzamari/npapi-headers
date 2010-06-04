@@ -817,7 +817,7 @@ NPError     NP_LOADDS NPN_PostURL(NPP instance, const char* url,
                                   const char* buf, NPBool file);
 NPError     NP_LOADDS NPN_RequestRead(NPStream* stream, NPByteRange* rangeList);
 NPError     NP_LOADDS NPN_NewStream(NPP instance, NPMIMEType type,
-                                const char* target, NPStream** stream);
+                                    const char* target, NPStream** stream);
 int32_t     NP_LOADDS NPN_Write(NPP instance, NPStream* stream, int32_t len,
                                 void* buffer);
 NPError     NP_LOADDS NPN_DestroyStream(NPP instance, NPStream* stream,
