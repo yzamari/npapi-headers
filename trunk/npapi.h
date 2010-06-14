@@ -754,6 +754,7 @@ enum NPEventType {
 #define NPVERS_HAS_URL_AND_AUTH_INFO        21
 #define NPVERS_HAS_PRIVATE_MODE             22
 #define NPVERS_MACOSX_HAS_COCOA_EVENTS      23
+#define NPVERS_HAS_ADVANCED_KEY_HANDLING    25
 
 /*----------------------------------------------------------------------*/
 /*                        Function Prototypes                           */
