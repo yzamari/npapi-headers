@@ -1,0 +1,1 @@
+This project has been replaced by the [npapi-sdk/ project](http://code.google.com/p/npapi-sdk)
